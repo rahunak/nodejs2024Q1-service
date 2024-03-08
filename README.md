@@ -75,3 +75,6 @@ Algorithm:
 1. npm install
 2. copy .env.example, rename to .env
 3. run scripts from package.json
+
+Also for use Swagger, go to:
+http://localhost:4000/swagger
