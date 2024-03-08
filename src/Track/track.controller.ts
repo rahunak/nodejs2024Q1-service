@@ -3,6 +3,7 @@ import {
   Get,
   Query,
   Post,
+  Header,
   Body,
   Put,
   Param,
@@ -23,33 +24,37 @@ import { TrackService } from './track.service';
 export class TrackController {
   constructor(private readonly TrackService: TrackService) {}
   @Get()
+  @Header('Content-Type', 'application/json')
   getAllPosts(): Promise<ITrack[]> {
     return this.TrackService.getAllTracks();
   }
 
   @Get(':id')
-  getTrackById(
+  @Header('Content-Type', 'application/json')
+  getById(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
   ): Promise<Track> {
-    return this.TrackService.getTrackById(id);
+    return this.TrackService.getById(id);
   }
 
   @Post()
+  @Header('Content-Type', 'application/json')
   create(@Body() CreateTrackDto: CreateTrackDto): Promise<ITrack> {
-    return this.TrackService.createTrack(CreateTrackDto);
+    return this.TrackService.create(CreateTrackDto);
   }
 
   @Put(':id')
-  updateTrack(
+  @Header('Content-Type', 'application/json')
+  update(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
     @Body() UpdateTrackDto: UpdateTrackDto,
   ): Promise<ITrack> {
-    return this.TrackService.updateTrack(id, UpdateTrackDto);
+    return this.TrackService.update(id, UpdateTrackDto);
   }
 
   @Delete(':id')
   @HttpCode(204)
   remove(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
-    return this.TrackService.removeTrack(id);
+    return this.TrackService.remove(id);
   }
 }

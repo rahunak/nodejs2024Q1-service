@@ -1,26 +1,16 @@
 import { Injectable } from '@nestjs/common';
-
-//temp
 import { User } from '../User/Entity/User';
 import { Track } from '../Track/Entity/Track';
 import { Artist } from '../Artist/Entity/Artist';
 import { Album } from '../Album/Entity/Album';
+import { Favorite } from '../Favorite/Entity/Favorite';
+import { FavoriteStorage } from '../Favorite/Entity/Favorite';
 
 @Injectable()
 export class DbService {
-  usersStorage: User[] = [
-    new User({ login: 'test0', password: 'test-pass' }),
-    new User({ login: 'test1', password: 'test-pass1' }),
-  ];
+  usersStorage: User[] = [];
 
-  trackStorage: Track[] = [
-    new Track({
-      name: 'Разбуры турмы муры',
-      artistId: 'Яцек Качмарски',
-      albumId: 'album1',
-      duration: 200,
-    }),
-  ];
+  trackStorage: Track[] = [];
 
   artistStorage: Artist[] = [
     new Artist({
@@ -29,11 +19,11 @@ export class DbService {
     }),
   ];
 
-  albumStorage: Album[] = [
-    new Album({
-      name: 'Жыве Беларусь!',
-      year: 1999,
-      artistId: null,
-    }),
-  ];
+  albumStorage: Album[] = [];
+
+  favoriteStorage: FavoriteStorage = {
+    favoriteArtistsStorage: [],
+    favoriteAlbumsStorage: [],
+    favoriteTracksStorage: [],
+  };
 }

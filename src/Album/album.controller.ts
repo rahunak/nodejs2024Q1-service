@@ -5,6 +5,7 @@ import {
   Body,
   Put,
   Param,
+  Header,
   Delete,
   ParseUUIDPipe,
   UseInterceptors,
@@ -22,23 +23,27 @@ import { AlbumService } from './album.service';
 export class AlbumController {
   constructor(private readonly AlbumService: AlbumService) {}
   @Get()
+  @Header('Content-Type', 'application/json')
   getAllPosts(): Promise<IAlbum[]> {
     return this.AlbumService.getAllAlbums();
   }
 
   @Get(':id')
-  getAlbumById(
+  @Header('Content-Type', 'application/json')
+  getById(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
   ): Promise<Album> {
-    return this.AlbumService.getAlbumById(id);
+    return this.AlbumService.getById(id);
   }
 
   @Post()
+  @Header('Content-Type', 'application/json')
   create(@Body() CreateAlbumDto: CreateAlbumDto): Promise<IAlbum> {
     return this.AlbumService.createAlbum(CreateAlbumDto);
   }
 
   @Put(':id')
+  @Header('Content-Type', 'application/json')
   updateAlbum(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
     @Body() UpdatePasswordDto: UpdatePasswordDto,

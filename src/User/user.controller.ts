@@ -5,6 +5,7 @@ import {
   Post,
   Body,
   Put,
+  Header,
   Param,
   Delete,
   ParseUUIDPipe,
@@ -23,11 +24,13 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly UserService: UserService) {}
   @Get()
+  @Header('Content-Type', 'application/json')
   getAllPosts(): Promise<IUser[]> {
     return this.UserService.getAllUsers();
   }
 
   @Get(':id')
+  @Header('Content-Type', 'application/json')
   getUserById(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
   ): Promise<User> {
@@ -35,11 +38,13 @@ export class UserController {
   }
 
   @Post()
+  @Header('Content-Type', 'application/json')
   create(@Body() CreateUserDto: CreateUserDto): Promise<IUser> {
     return this.UserService.createUser(CreateUserDto);
   }
 
   @Put(':id')
+  @Header('Content-Type', 'application/json')
   updateUserPassword(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
     @Body() UpdatePasswordDto: UpdatePasswordDto,

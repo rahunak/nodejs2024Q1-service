@@ -18,7 +18,7 @@ export class TrackService {
     return this.dataBase.trackStorage;
   }
 
-  async getTrackById(id: string) {
+  async getById(id: string) {
     const foundTrack = this.dataBase.trackStorage.find(
       (track) => track.id === id,
     );
@@ -28,7 +28,7 @@ export class TrackService {
     return foundTrack;
   }
 
-  async createTrack(trackData: CreateTrackDto): Promise<Track> {
+  async create(trackData: CreateTrackDto): Promise<Track> {
     const newTrack = new Track({
       name: trackData.name,
       artistId: trackData.artistId,
@@ -39,8 +39,8 @@ export class TrackService {
     return newTrack;
   }
 
-  async updateTrack(id: string, updateTrackData: UpdateTrackDto) {
-    const track = await this.getTrackById(id);
+  async update(id: string, updateTrackData: UpdateTrackDto) {
+    const track = await this.getById(id);
     for (const key in updateTrackData) {
       if (key in track) {
         track[key] = updateTrackData[key];
@@ -49,8 +49,8 @@ export class TrackService {
     return track;
   }
 
-  async removeTrack(id: string) {
-    const track = await this.getTrackById(id);
+  async remove(id: string) {
+    const track = await this.getById(id);
     this.dataBase.trackStorage = this.dataBase.trackStorage.filter(
       (track) => track.id !== id,
     );

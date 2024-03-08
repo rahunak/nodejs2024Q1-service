@@ -4,6 +4,7 @@ import {
   Post,
   Body,
   Put,
+  Header,
   Param,
   Delete,
   ParseUUIDPipe,
@@ -22,23 +23,27 @@ import { ArtistService } from './artist.service';
 export class ArtistController {
   constructor(private readonly ArtistService: ArtistService) {}
   @Get()
+  @Header('Content-Type', 'application/json')
   getAllPosts(): Promise<IArtist[]> {
     return this.ArtistService.getAllArtists();
   }
 
   @Get(':id')
-  getArtistById(
+  @Header('Content-Type', 'application/json')
+  getById(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
   ): Promise<Artist> {
-    return this.ArtistService.getArtistById(id);
+    return this.ArtistService.getById(id);
   }
 
   @Post()
+  @Header('Content-Type', 'application/json')
   create(@Body() CreateArtistDto: CreateArtistDto): Promise<IArtist> {
     return this.ArtistService.createArtist(CreateArtistDto);
   }
 
   @Put(':id')
+  @Header('Content-Type', 'application/json')
   updateArtist(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
     @Body() UpdatePasswordDto: UpdatePasswordDto,

@@ -17,7 +17,7 @@ export class ArtistService {
     return this.dataBase.artistStorage;
   }
 
-  async getArtistById(id: string) {
+  async getById(id: string) {
     const foundArtist = this.dataBase.artistStorage.find(
       (artist) => artist.id === id,
     );
@@ -37,7 +37,7 @@ export class ArtistService {
   }
 
   async updateArtist(id: string, updatedData: UpdatePasswordDto) {
-    const artist = await this.getArtistById(id);
+    const artist = await this.getById(id);
     for (const key in updatedData) {
       if (key in artist) {
         artist[key] = updatedData[key];
@@ -47,7 +47,7 @@ export class ArtistService {
   }
 
   async removeArtist(id: string) {
-    const artist = await this.getArtistById(id);
+    const artist = await this.getById(id);
     this.dataBase.artistStorage = this.dataBase.artistStorage.filter(
       (artist) => artist.id !== id,
     );

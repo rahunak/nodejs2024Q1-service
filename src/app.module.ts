@@ -7,6 +7,7 @@ import { UserModule } from './User/user.module';
 import { TrackModule } from './Track/track.module';
 import { ArtistModule } from './Artist/artist.module';
 import { AlbumModule } from './Album/album.module';
+import { FavoriteModule } from './Favorite/favorite.module';
 
 ConfigModule.forRoot();
 @Module({
@@ -18,6 +19,7 @@ ConfigModule.forRoot();
     TrackModule,
     ArtistModule,
     AlbumModule,
+    FavoriteModule,
   ],
 })
 export class AppModule {}

@@ -17,7 +17,7 @@ export class AlbumService {
     return this.dataBase.albumStorage;
   }
 
-  async getAlbumById(id: string) {
+  async getById(id: string) {
     const foundAlbum = this.dataBase.albumStorage.find(
       (album) => album.id === id,
     );
@@ -34,7 +34,7 @@ export class AlbumService {
   }
 
   async updateAlbum(id: string, updatedData: UpdatePasswordDto) {
-    const album = await this.getAlbumById(id);
+    const album = await this.getById(id);
     for (const key in updatedData) {
       if (key in album) {
         album[key] = updatedData[key];
@@ -44,7 +44,7 @@ export class AlbumService {
   }
 
   async removeAlbum(id: string) {
-    const album = await this.getAlbumById(id);
+    const album = await this.getById(id);
     this.dataBase.albumStorage = this.dataBase.albumStorage.filter(
       (album) => album.id !== id,
     );
