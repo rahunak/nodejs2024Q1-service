@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 //temp
 import { User } from '../User/Entity/User';
 import { Track } from '../Track/Entity/Track';
+import { Artist } from '../Artist/Entity/Artist';
 
 @Injectable()
 export class DbService {
@@ -14,9 +15,16 @@ export class DbService {
   trackStorage: Track[] = [
     new Track({
       name: 'Разбуры турмы муры',
-      artistId: 'Яцеком Качмарски',
+      artistId: 'Яцек Качмарски',
       albumId: 'album1',
       duration: 200,
+    }),
+  ];
+
+  artistStorage: Artist[] = [
+    new Artist({
+      name: 'Яцек Качмарски',
+      grammy: true,
     }),
   ];
 }
