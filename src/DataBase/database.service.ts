@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 //temp
 import { User } from '../User/Entity/User';
+import { Track } from '../Track/Entity/Track';
 
 @Injectable()
 export class DbService {
@@ -9,4 +10,6 @@ export class DbService {
     new User({ login: 'test0', password: 'test-pass' }),
     new User({ login: 'test1', password: 'test-pass1' }),
   ];
+
+  trackStorage: Track[] = [];
 }
