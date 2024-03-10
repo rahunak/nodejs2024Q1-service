@@ -56,6 +56,5 @@ export class UserService {
     this.dataBase.usersStorage = this.dataBase.usersStorage.filter(
       (user) => user.id !== id,
     );
-    return user;
   }
 }

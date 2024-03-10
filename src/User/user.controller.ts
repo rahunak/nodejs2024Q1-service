@@ -10,6 +10,7 @@ import {
   ParseUUIDPipe,
   UseInterceptors,
   ClassSerializerInterceptor,
+  HttpCode,
 } from '@nestjs/common';
 import { CreateUserDto, UpdatePasswordDto } from './Dto/UserDto';
 import { User } from './Entity/User';
@@ -47,7 +48,8 @@ export class UserController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return `This action removes a #${id} cat`;
+  @HttpCode(204)
+  remove(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
+    return this.UserService.removeUser(id);
   }
 }
