@@ -4,6 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { User } from '../User/Entity/User';
 import { Track } from '../Track/Entity/Track';
 import { Artist } from '../Artist/Entity/Artist';
+import { Album } from '../Album/Entity/Album';
 
 @Injectable()
 export class DbService {
@@ -25,6 +26,14 @@ export class DbService {
     new Artist({
       name: 'Яцек Качмарски',
       grammy: true,
+    }),
+  ];
+
+  albumStorage: Album[] = [
+    new Album({
+      name: 'Жыве Беларусь!',
+      year: 1999,
+      artistId: null,
     }),
   ];
 }
