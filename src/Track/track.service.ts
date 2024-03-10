@@ -8,7 +8,7 @@ import { DbService } from '../DataBase/database.service';
 import { Track } from './Entity/Track';
 import { CreateTrackDto } from './Dto/TrackDto';
 import { ITrack } from './Interface/ITrack';
-import { UpdatePasswordDto } from './Dto/TrackDto';
+import { UpdateTrackDto } from './Dto/TrackDto';
 
 @Injectable()
 export class TrackService {
@@ -30,26 +30,22 @@ export class TrackService {
 
   async createTrack(trackData: CreateTrackDto): Promise<Track> {
     const newTrack = new Track({
-      login: trackData.login,
-      password: trackData.password,
+      name: trackData.name,
+      artistId: trackData.artistId,
+      albumId: trackData.albumId,
+      duration: +trackData.duration,
     });
     this.dataBase.trackStorage.push(newTrack);
     return newTrack;
   }
 
-  async updateTrackPassword(id: string, passwordsData: UpdatePasswordDto) {
-    const oldPassword = passwordsData.oldPassword;
-    const newPassword = passwordsData.newPassword;
+  async updateTrack(id: string, updateTrackData: UpdateTrackDto) {
     const track = await this.getTrackById(id);
-    if (track.password !== oldPassword) {
-      throw new HttpException(
-        'Old password doesnt match with track password',
-        403,
-      );
+    for (const key in updateTrackData) {
+      if (key in track) {
+        track[key] = updateTrackData[key];
+      }
     }
-    track.password = newPassword;
-    track.version += 1;
-    track.updatedAt = Date.now();
     return track;
   }
 

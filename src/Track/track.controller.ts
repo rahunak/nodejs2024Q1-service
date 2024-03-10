@@ -12,13 +12,13 @@ import {
   ClassSerializerInterceptor,
   HttpCode,
 } from '@nestjs/common';
-import { CreateTrackDto, UpdatePasswordDto } from './Dto/TrackDto';
+import { CreateTrackDto, UpdateTrackDto } from './Dto/TrackDto';
 import { Track } from './Entity/Track';
 import { ITrack } from './Interface/ITrack';
 import { v4 as uuid } from 'uuid';
-import { TrackService } from './Track.service';
+import { TrackService } from './track.service';
 
-@Controller('Track')
+@Controller('track')
 @UseInterceptors(ClassSerializerInterceptor)
 export class TrackController {
   constructor(private readonly TrackService: TrackService) {}
@@ -40,11 +40,11 @@ export class TrackController {
   }
 
   @Put(':id')
-  updateTrackPassword(
+  updateTrack(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
-    @Body() UpdatePasswordDto: UpdatePasswordDto,
+    @Body() UpdateTrackDto: UpdateTrackDto,
   ): Promise<ITrack> {
-    return this.TrackService.updateTrackPassword(id, UpdatePasswordDto);
+    return this.TrackService.updateTrack(id, UpdateTrackDto);
   }
 
   @Delete(':id')

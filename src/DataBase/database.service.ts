@@ -11,5 +11,12 @@ export class DbService {
     new User({ login: 'test1', password: 'test-pass1' }),
   ];
 
-  trackStorage: Track[] = [];
+  trackStorage: Track[] = [
+    new Track({
+      name: 'Разбуры турмы муры',
+      artistId: 'Яцеком Качмарски',
+      albumId: 'album1',
+      duration: 200,
+    }),
+  ];
 }

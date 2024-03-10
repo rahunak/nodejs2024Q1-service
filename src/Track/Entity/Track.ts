@@ -1,23 +1,17 @@
-import { Exclude } from 'class-transformer';
 import { v4 as uuid } from 'uuid';
 import { ITrack } from '../Interface/ITrack';
 
 export class Track implements ITrack {
   id: string; // uuid v4
-  login: string;
-  version: number; // integer number, increments on update
-  createdAt: number; // timestamp of creation
-  updatedAt: number; // timestamp of last update
-
-  @Exclude()
-  password: string;
-
-  constructor({ login, password }: Partial<Track>) {
+  name: string;
+  artistId: string | null; // refers to Artist
+  albumId: string | null; // refers to Album
+  duration: number; // integer number
+  constructor({ name, artistId, albumId, duration }: Partial<Track>) {
     this.id = uuid();
-    this.login = login;
-    this.version = 1;
-    this.createdAt = Date.now();
-    this.updatedAt = Date.now();
-    this.password = password;
+    this.name = name;
+    this.artistId = artistId;
+    this.albumId = albumId;
+    this.duration = duration;
   }
 }

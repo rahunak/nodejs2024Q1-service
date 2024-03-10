@@ -1,22 +1,21 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, IsInt, IsOptional } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
 export class CreateTrackDto {
-  @IsString({ message: 'Track Login must be a string.' })
-  @IsNotEmpty({ message: 'Track Login is required.' })
-  login: string;
+  @IsString({ message: 'Track Name must be a string.' })
+  @IsNotEmpty({ message: 'Track Name is required.' })
+  name: string;
 
-  @IsString({ message: 'Track Password must be a string.' })
-  @IsNotEmpty({ message: 'Track Password is required.' })
-  password: string;
+  @IsString({ message: 'Track artistId must be a string.' })
+  @IsOptional()
+  artistId: string | null; // refers to Artist
+
+  @IsString({ message: 'Track albumId must be a string.' })
+  @IsOptional()
+  albumId: string | null; // refers to Album
+
+  @IsInt({ message: 'Track duration should be integer.' })
+  duration: number; // integer number
 }
 
-export class UpdatePasswordDto extends PartialType(CreateTrackDto) {
-  @IsString({ message: 'Old password must be a string.' })
-  @IsNotEmpty({ message: 'Old password is required.' })
-  oldPassword: string;
-
-  @IsString({ message: 'New password must be a string.' })
-  @IsNotEmpty({ message: 'New password is required.' })
-  newPassword: string;
-}
+export class UpdateTrackDto extends PartialType(CreateTrackDto) {}
