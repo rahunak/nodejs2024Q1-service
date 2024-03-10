@@ -38,16 +38,16 @@ export class UserController {
     return this.UserService.createUser(CreateUserDto);
   }
 
-  // @Put(':id')
-  // update(
-  //   @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
-  //   @Body() UpdatePasswordDto: UpdatePasswordDto,
-  // ) {
-  //   return `This action updates a UpdatePasswordDto #${id} cat`;
-  // }
+  @Put(':id')
+  updateUserPassword(
+    @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
+    @Body() UpdatePasswordDto: UpdatePasswordDto,
+  ): Promise<IUser> {
+    return this.UserService.updateUserPassword(id, UpdatePasswordDto);
+  }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return `This action removes a #${id} cat`;
-  // }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return `This action removes a #${id} cat`;
+  }
 }
