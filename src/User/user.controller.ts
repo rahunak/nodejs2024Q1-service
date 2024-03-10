@@ -8,6 +8,8 @@ import {
   Param,
   Delete,
   ParseUUIDPipe,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { CreateUserDto, UpdatePasswordDto } from './Dto/UserDto';
 import { User } from './Entity/User';
@@ -16,6 +18,7 @@ import { v4 as uuid } from 'uuid';
 import { UserService } from './user.service';
 
 @Controller('user')
+@UseInterceptors(ClassSerializerInterceptor)
 export class UserController {
   constructor(private readonly UserService: UserService) {}
   @Get()
@@ -30,10 +33,10 @@ export class UserController {
     return this.UserService.getUserById(id);
   }
 
-  // @Post()
-  // create(@Body() CreateUserDto: CreateUserDto): void {
-  //   usersDB.push(new User({ login: 'test-login', password: 'test-password' }));
-  // }
+  @Post()
+  create(@Body() CreateUserDto: CreateUserDto): Promise<IUser> {
+    return this.UserService.createUser(CreateUserDto);
+  }
 
   // @Put(':id')
   // update(
