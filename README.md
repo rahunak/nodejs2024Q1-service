@@ -71,10 +71,38 @@ Press <kbd>F5</kbd> to debug.
 
 For more information, visit: https://code.visualstudio.com/docs/editor/debugging
 
-Algorithm:
-1. npm install
-2. copy .env.example, rename to .env
-3. run scripts from package.json
+Task: [Home Library Service: Part 1](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/rest-service/assignment.md)
+End date:  2024-03-12 01:11 / 2024-03-12 03:00
+Score:  730 / 760
+# Scoring: REST Service
 
-Also for use Swagger, go to:
-http://localhost:4000/swagger
+
+
+## Basic Scope
+- **+10** The repository with the application contains a `Readme.md`
+- **+10** The application code that worked with `Users`
+- **+10** The application code that worked with `Tracks`
+- **+10** The application code that worked with `Albums`
+- **+10** The application code that worked with `Artists`
+- **+10**  The application code that worked with Favorites
+- **+5**  Not each successfully passed test)
+
+## Advanced Scope
+- **+10** PORT value is stored into `.env` file
+- **+20** OpenAPI spec in doc folder corresponds with assignment (go to http://localhost:4000/swagger)
+
+Not implemented:
+6.When you delete Artist, Album or Track, it's id should be deleted from favorites (if was there) and references to it in other entities should become null. For example: Artist is deleted => this artistId in corresponding Albums's and Track's become null + this artist's id is deleted from favorites, same logic for Album and Track.
+
+7.Non-existing entity can't be added to Favorites.
+
+1. git clone https://github.com/rahunak/nodejs2024Q1-service.git
+2. git checkout dev
+3. cd nodejs2024Q1-service
+4. npm install (sometime need use '--legacy-peer-deps' - i hope it's not my case:)
+5. copy .env.example and rename to .env
+6. npm run start (or npm run start:dev **if you want**)
+7. check
+8. swagger is there: http://localhost:4000/swagger
+
+Have a nice check!
