@@ -50,7 +50,7 @@ export class FavoriteController {
   remove(
     @Param('type') type: string,
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
-  ) {
+  ): Promise<string> {
     return this.FavoriteService.remove(type, id);
   }
 }

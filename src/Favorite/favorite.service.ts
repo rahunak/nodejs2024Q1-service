@@ -46,9 +46,7 @@ export class FavoriteService {
 
   async create(type: string, id: string): Promise<string> {
     const res = await this.favoriteService[type].getById(id);
-    console.log('res', res);
     this.dataBase.favoriteStorage[this.favoriteArr[type]].push(res);
-    console.log('итог', this.dataBase.favoriteStorage[this.favoriteArr[type]]);
 
     return (
       'New record with type:' +
@@ -59,5 +57,20 @@ export class FavoriteService {
     );
   }
 
-  async remove(type: string, id: string) {}
+  async remove(type: string, id: string) {
+    const foundFavorite = await this.favoriteService[type].getById(id);
+
+    const index =
+      this.dataBase.favoriteStorage[this.favoriteArr[type]].indexOf(
+        foundFavorite,
+      );
+    this.dataBase.favoriteStorage[this.favoriteArr[type]].splice(index, 1);
+    return (
+      'Record with type:' +
+      type +
+      '\n and with id:' +
+      id +
+      '\n was removed from Favorite successfully'
+    );
+  }
 }
