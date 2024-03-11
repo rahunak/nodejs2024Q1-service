@@ -24,8 +24,8 @@ export class AlbumController {
   constructor(private readonly AlbumService: AlbumService) {}
   @Get()
   @Header('Content-Type', 'application/json')
-  getAllPosts(): Promise<IAlbum[]> {
-    return this.AlbumService.getAllAlbums();
+  getAll(): Promise<IAlbum[]> {
+    return this.AlbumService.getAll();
   }
 
   @Get(':id')
@@ -39,21 +39,21 @@ export class AlbumController {
   @Post()
   @Header('Content-Type', 'application/json')
   create(@Body() CreateAlbumDto: CreateAlbumDto): Promise<IAlbum> {
-    return this.AlbumService.createAlbum(CreateAlbumDto);
+    return this.AlbumService.create(CreateAlbumDto);
   }
 
   @Put(':id')
   @Header('Content-Type', 'application/json')
-  updateAlbum(
+  update(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
     @Body() UpdatePasswordDto: UpdatePasswordDto,
   ): Promise<IAlbum> {
-    return this.AlbumService.updateAlbum(id, UpdatePasswordDto);
+    return this.AlbumService.update(id, UpdatePasswordDto);
   }
 
   @Delete(':id')
   @HttpCode(204)
   remove(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
-    return this.AlbumService.removeAlbum(id);
+    return this.AlbumService.remove(id);
   }
 }

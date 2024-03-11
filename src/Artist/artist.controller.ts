@@ -24,8 +24,8 @@ export class ArtistController {
   constructor(private readonly ArtistService: ArtistService) {}
   @Get()
   @Header('Content-Type', 'application/json')
-  getAllPosts(): Promise<IArtist[]> {
-    return this.ArtistService.getAllArtists();
+  getAll(): Promise<IArtist[]> {
+    return this.ArtistService.getAll();
   }
 
   @Get(':id')
@@ -39,21 +39,21 @@ export class ArtistController {
   @Post()
   @Header('Content-Type', 'application/json')
   create(@Body() CreateArtistDto: CreateArtistDto): Promise<IArtist> {
-    return this.ArtistService.createArtist(CreateArtistDto);
+    return this.ArtistService.create(CreateArtistDto);
   }
 
   @Put(':id')
   @Header('Content-Type', 'application/json')
-  updateArtist(
+  update(
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
     @Body() UpdatePasswordDto: UpdatePasswordDto,
   ): Promise<IArtist> {
-    return this.ArtistService.updateArtist(id, UpdatePasswordDto);
+    return this.ArtistService.update(id, UpdatePasswordDto);
   }
 
   @Delete(':id')
   @HttpCode(204)
   remove(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
-    return this.ArtistService.removeArtist(id);
+    return this.ArtistService.remove(id);
   }
 }

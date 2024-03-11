@@ -14,7 +14,7 @@ import { UpdateTrackDto } from './Dto/TrackDto';
 export class TrackService {
   constructor(private dataBase: DbService) {}
 
-  async getAllTracks(): Promise<ITrack[]> {
+  async getAll(): Promise<ITrack[]> {
     return this.dataBase.trackStorage;
   }
 

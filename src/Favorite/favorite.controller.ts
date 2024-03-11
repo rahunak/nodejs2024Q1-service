@@ -23,13 +23,13 @@ export class FavoriteController {
   constructor(private readonly FavoriteService: FavoriteService) {}
   @Get()
   @Header('Content-Type', 'application/json')
-  getAllPosts(): Promise<FavoriteStorage> {
+  getAll(): Promise<FavoriteStorage> {
     return this.FavoriteService.getAll();
   }
 
   @Get(':type/:id')
   @Header('Content-Type', 'application/json')
-  getFavoriteByTypeAndId(
+  getById(
     @Param('type') type: string,
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
   ): Promise<FavoriteEntity> {
@@ -38,7 +38,7 @@ export class FavoriteController {
 
   @Post(':type/:id')
   @Header('Content-Type', 'application/json')
-  createFavorite(
+  create(
     @Param('type') type: string,
     @Param('id', new ParseUUIDPipe({ version: '4' })) id: string,
   ): Promise<string> {

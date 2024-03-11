@@ -25,8 +25,8 @@ export class TrackController {
   constructor(private readonly TrackService: TrackService) {}
   @Get()
   @Header('Content-Type', 'application/json')
-  getAllPosts(): Promise<ITrack[]> {
-    return this.TrackService.getAllTracks();
+  getAll(): Promise<ITrack[]> {
+    return this.TrackService.getAll();
   }
 
   @Get(':id')

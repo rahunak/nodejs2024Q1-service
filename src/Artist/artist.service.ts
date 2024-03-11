@@ -13,7 +13,7 @@ import { IArtist } from './Interface/IArtist';
 export class ArtistService {
   constructor(private dataBase: DbService) {}
 
-  async getAllArtists(): Promise<IArtist[]> {
+  async getAll(): Promise<IArtist[]> {
     return this.dataBase.artistStorage;
   }
 
@@ -27,7 +27,7 @@ export class ArtistService {
     return foundArtist;
   }
 
-  async createArtist(userData: CreateArtistDto): Promise<Artist> {
+  async create(userData: CreateArtistDto): Promise<Artist> {
     const newArtist = new Artist({
       name: userData.name,
       grammy: userData.grammy,
@@ -36,7 +36,7 @@ export class ArtistService {
     return newArtist;
   }
 
-  async updateArtist(id: string, updatedData: UpdatePasswordDto) {
+  async update(id: string, updatedData: UpdatePasswordDto) {
     const artist = await this.getById(id);
     for (const key in updatedData) {
       if (key in artist) {
@@ -46,7 +46,7 @@ export class ArtistService {
     return artist;
   }
 
-  async removeArtist(id: string) {
+  async remove(id: string) {
     const artist = await this.getById(id);
     this.dataBase.artistStorage = this.dataBase.artistStorage.filter(
       (artist) => artist.id !== id,

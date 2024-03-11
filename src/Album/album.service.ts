@@ -13,7 +13,7 @@ import { IAlbum } from './Interface/IAlbum';
 export class AlbumService {
   constructor(private dataBase: DbService) {}
 
-  async getAllAlbums(): Promise<IAlbum[]> {
+  async getAll(): Promise<IAlbum[]> {
     return this.dataBase.albumStorage;
   }
 
@@ -27,13 +27,13 @@ export class AlbumService {
     return foundAlbum;
   }
 
-  async createAlbum(userData: CreateAlbumDto): Promise<Album> {
+  async create(userData: CreateAlbumDto): Promise<Album> {
     const newAlbum = new Album(userData);
     this.dataBase.albumStorage.push(newAlbum);
     return newAlbum;
   }
 
-  async updateAlbum(id: string, updatedData: UpdatePasswordDto) {
+  async update(id: string, updatedData: UpdatePasswordDto) {
     const album = await this.getById(id);
     for (const key in updatedData) {
       if (key in album) {
@@ -43,7 +43,7 @@ export class AlbumService {
     return album;
   }
 
-  async removeAlbum(id: string) {
+  async remove(id: string) {
     const album = await this.getById(id);
     this.dataBase.albumStorage = this.dataBase.albumStorage.filter(
       (album) => album.id !== id,
